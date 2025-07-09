@@ -4,7 +4,7 @@ const path = require('path');
 const cors = require('cors');
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000; // Use dynamic port on Render
 
 // Enable CORS for frontend
 app.use(cors());
@@ -26,15 +26,16 @@ app.post('/upload', upload.single('video'), (req, res) => {
   res.json({ url: `/uploads/${req.file.filename}` });
 });
 
-//Store analysis result
+// Store analysis result
 app.post('/save-result', (req, res) => {
   console.log('Received posture result:', req.body);
   res.json({ message: 'Result saved (not actually writing to DB)' });
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
+
 
 
 
