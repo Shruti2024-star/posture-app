@@ -31,7 +31,8 @@ const PostureApp = () => {
     });
 
     const data = await res.json();
-    const videoURL = `http://localhost:5000${data.url}`;
+    const videoURL = `${process.env.REACT_APP_API_URL}${data.url}`;
+
     setUploadedVideoUrl(videoURL); 
   } catch (error) {
     console.error('Error uploading video:', error);
